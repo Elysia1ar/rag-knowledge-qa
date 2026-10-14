@@ -1,0 +1,46 @@
+React 是 Facebook 开发的声明式 UI 库，用于构建用户界面。
+
+核心概念：
+- 组件（Component）：函数式组件为主流，接收 props 返回 JSX
+- Props：父组件传给子组件的只读数据
+- State：组件内部可变状态，用 useState 声明
+- 生命周期：函数组件用 useEffect 模拟
+
+函数组件示例：
+function Counter() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    document.title = `点击 ${count} 次`;
+  }, [count]);
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+
+Hooks 规则：
+- 只能在函数组件或自定义 Hook 中调用
+- 不能在条件、循环、嵌套函数中调用
+- 调用顺序必须稳定
+
+常用 Hooks：
+- useState：状态
+- useEffect：副作用（数据请求、订阅、DOM 操作）
+- useContext：跨层级传值
+- useMemo / useCallback：性能优化，避免重复计算或引用变化
+- useRef：引用 DOM 或保存不变值
+- useReducer：复杂状态逻辑
+
+状态管理：
+- Context + useReducer：轻量级全局状态
+- Redux / Zustand / Jotai：大型应用
+
+路由使用 react-router-dom：
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/about" element={<About />} />
+  </Routes>
+</BrowserRouter>
+
+渲染优化：
+- React.memo 避免 props 未变时重渲染
+- key 帮助 Diff 算法识别元素
+- 虚拟列表处理长列表

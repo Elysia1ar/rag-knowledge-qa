@@ -1,0 +1,24 @@
+FastAPI 是一个现代、高性能的 Python Web 框架，基于 Starlette 和 Pydantic 构建。
+它的主要特点是：自动生成 OpenAPI 文档、基于类型注解的参数校验、原生支持异步。
+
+FastAPI 的核心概念包括：
+- 路径操作装饰器：@app.get、@app.post、@app.put、@app.delete
+- 请求体：使用 Pydantic BaseModel 定义，自动校验字段类型
+- 依赖注入：通过 Depends() 声明依赖，支持嵌套和缓存
+- 中间件：在请求前后执行逻辑，如 CORS、日志、鉴权
+
+路由分组使用 APIRouter：
+router = APIRouter(prefix="/api/v1", tags=["users"])
+app.include_router(router)
+
+响应模型通过 response_model 参数指定，FastAPI 会自动过滤输出字段。
+状态码通过 status_code 指定，或使用 HTTPException 抛出错误。
+
+FastAPI 支持多种响应类型：JSONResponse、StreamingResponse、FileResponse。
+StreamingResponse 常用于 SSE 流式推送或大文件下载。
+
+生命周期使用 lifespan 上下文管理器，在应用启动和关闭时执行初始化逻辑。
+常见用途包括：创建数据库连接池、加载机器学习模型、注册定时任务。
+
+性能方面，FastAPI 基于 ASGI 协议，可以搭配 uvicorn、hypercorn 等 ASGI 服务器。
+相比 Flask 和 Django，异步端点在高并发 IO 场景下吞吐量显著更高。

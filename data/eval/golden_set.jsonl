@@ -1,0 +1,42 @@
+{"question": "RAG 是什么？", "ground_truth": "RAG 是检索增强生成，将信息检索与大语言模型生成能力结合，在生成回答前先从外部知识库检索相关片段作为上下文。"}
+{"question": "RAG 的典型管线包括哪些步骤？", "ground_truth": "包括文档加载、文本分块、向量化、索引存储、检索召回、重排序、生成回答七个步骤。"}
+{"question": "RAG 相比直接让模型回答有什么优势？", "ground_truth": "知识可更新、减少幻觉、可溯源、成本可控。"}
+{"question": "为什么 RAG 能减少大模型的幻觉？", "ground_truth": "因为回答基于检索到的真实文档片段，而非完全依赖模型内部记忆，降低编造事实的概率。"}
+{"question": "RAG 常见应用场景有哪些？", "ground_truth": "企业知识库问答、智能客服、文档助手、法律和医疗领域的专业问答系统。"}
+{"question": "Chroma 是什么？", "ground_truth": "Chroma 是轻量级开源向量数据库，支持本地持久化和内存模式，基于 HNSW 实现近似最近邻搜索，适合开发和中小规模场景。"}
+{"question": "FAISS 有什么优势和局限？", "ground_truth": "优势是检索速度极快，支持 GPU 加速和多种索引类型；局限是纯库而非数据库，不提供持久化和元数据过滤。"}
+{"question": "Milvus 适合什么场景？", "ground_truth": "适合生产级大规模应用，支持十亿级向量规模，提供分布式架构、多副本和高可用，但部署运维复杂。"}
+{"question": "Qdrant 有什么特点？", "ground_truth": "Rust 编写的高性能向量数据库，支持丰富的过滤条件和混合检索，API 设计友好，性能优秀。"}
+{"question": "选择向量数据库需要考虑哪些因素？", "ground_truth": "数据规模、查询延迟要求、是否需要分布式部署、运维成本、社区活跃度和生态兼容性。"}
+{"question": "BGE 系列 Embedding 有哪些模型？", "ground_truth": "bge-small-zh-v1.5（512维）、bge-large-zh-v1.5（1024维）、bge-m3（多语言多粒度）。"}
+{"question": "bge-small 和 bge-large 有什么区别？", "ground_truth": "bge-small 向量维度 512，模型约 95MB，适合快速验证；bge-large 向量维度 1024，约 1.3GB，检索质量更高，适合生产。"}
+{"question": "OpenAI Embedding 有什么优缺点？", "ground_truth": "优势是无需本地部署，API 调用即可；局限是依赖网络和数据隐私。"}
+{"question": "Bi-Encoder 和 Cross-Encoder 有什么区别？", "ground_truth": "Bi-Encoder 分别编码 query 和 document 通过向量相似度排序，速度快可预计算；Cross-Encoder 拼接后一起输入模型，精度高但无法预计算。"}
+{"question": "什么是漏斗式检索架构？", "ground_truth": "第一步用 Bi-Encoder 快速召回 Top-20 到 Top-50 候选，第二步用 Cross-Encoder 精排返回 Top-3 到 Top-5。"}
+{"question": "BGE Reranker 有哪些常用模型？", "ground_truth": "bge-reranker-base（约 1.1GB）、bge-reranker-large（约 2.2GB）、bge-reranker-v2-m3（支持多语言）。"}
+{"question": "LangChain 的核心模块有哪些？", "ground_truth": "langchain-core（基础抽象层）、langchain-community（第三方集成）、以及各平台独立包如 langchain-openai、langchain-chroma。"}
+{"question": "LangChain 中的 Document Loaders 有哪些？", "ground_truth": "PyPDFLoader、Docx2txtLoader、TextLoader、UnstructuredMarkdownLoader。"}
+{"question": "LangChain 中的 Text Splitters 有什么作用？", "ground_truth": "将长文档切分为 chunk，RecursiveCharacterTextSplitter 支持自定义分隔符和 chunk_size。"}
+{"question": "LangChain 1.x 版本有哪些主要变化？", "ground_truth": "主包变薄、集成包独立发布、推荐使用 LCEL 替代传统 Chain 类、Python 最低版本要求 3.10。"}
+
+{"question": "bge-small-zh-v1.5 的向量维度是多少？", "ground_truth": "512 维。"}
+{"question": "bge-large-zh-v1.5 的向量维度是多少？", "ground_truth": "1024 维。"}
+{"question": "text-embedding-3-small 和 text-embedding-3-large 的向量维度分别是多少？", "ground_truth": "text-embedding-3-small 是 1536 维，text-embedding-3-large 是 3072 维。"}
+{"question": "bge-reranker-base 的模型体积大约是多少？", "ground_truth": "约 1.1GB。"}
+{"question": "bge-reranker-large 的模型体积大约是多少？", "ground_truth": "约 2.2GB。"}
+{"question": "Milvus 依赖哪些外部组件？", "ground_truth": "etcd、MinIO、Pulsar。"}
+{"question": "FAISS 支持哪些索引类型？", "ground_truth": "Flat、IVF、HNSW、PQ 等。"}
+{"question": "Chroma 使用什么算法实现近似最近邻搜索？", "ground_truth": "HNSW。"}
+{"question": "Qdrant 是用什么编程语言编写的？", "ground_truth": "Rust。"}
+{"question": "LangChain 1.x 要求的 Python 最低版本是多少？", "ground_truth": "Python 3.10。"}
+
+{"question": "Chroma 和 BGE 分别属于 RAG 管线的哪个环节？", "ground_truth": "Chroma 属于索引存储环节的向量数据库，BGE 属于向量化环节的 Embedding 模型。"}
+{"question": "如果要把 RAG 从 demo 做到生产级，需要做哪些组件替换？", "ground_truth": "向量库从 Chroma 换到 Milvus 或 Qdrant，Embedding 从 bge-small 换到 bge-large，并引入 Cross-Encoder 重排。"}
+{"question": "RAG 检索管线中，Bi-Encoder 和 Cross-Encoder 各自承担什么角色？", "ground_truth": "Bi-Encoder 承担大规模快速召回，Cross-Encoder 承担小规模精细重排，两者配合形成漏斗式架构。"}
+{"question": "RAG 和 LangChain 是什么关系？", "ground_truth": "RAG 是一种技术架构，LangChain 是实现 RAG 的框架，提供文档加载、分块、检索、生成等组件。"}
+{"question": "向量数据库选型时需要权衡哪些因素？", "ground_truth": "数据规模、查询延迟、是否需要分布式、运维成本、社区活跃度、生态兼容性。"}
+{"question": "BM25 和向量检索各有什么优劣？", "ground_truth": "BM25 擅长关键词精确匹配但不懂语义，向量检索擅长语义匹配但对专有名词不敏感，两者互补，混合使用效果更好。"}
+{"question": "在 RAG 中，Embedding 模型和 Reranker 模型分别用什么评估？", "ground_truth": "Embedding 模型用 MTEB 榜单和检索召回率评估，Reranker 通过对比引入前后的 Recall@K 和 MRR 评估。"}
+{"question": "从索引构建到回答生成，RAG 完整链路上有哪些关键组件？", "ground_truth": "文档加载器、文本分块器、Embedding 模型、向量数据库、检索器、重排序模型、LLM 生成器。"}
+{"question": "为什么 RAG 系统需要重排序环节？", "ground_truth": "因为 Bi-Encoder 只能做粗粒度召回，精度有限，Cross-Encoder 通过 query-document 交互做精排，能显著提升 Top-K 质量。"}
+{"question": "LangChain 中的 Retriever 和 VectorStore 有什么区别？", "ground_truth": "VectorStore 负责向量的存储与相似度搜索，Retriever 是更高层抽象，封装检索逻辑，可组合多种检索策略。"}

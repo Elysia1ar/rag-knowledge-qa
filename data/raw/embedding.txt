@@ -1,0 +1,25 @@
+Embedding（嵌入）是将文本映射为稠密向量的过程，是 RAG 系统中语义检索的基础。
+
+Embedding 模型的选择直接影响检索质量。主流中文 Embedding 模型对比：
+
+BGE 系列（BAAI General Embedding）：
+由北京智源研究院开发，是目前中文 RAG 场景中最常用的 Embedding 模型系列。
+bge-small-zh-v1.5：向量维度 512，模型体积约 95MB，适合快速验证和资源受限场景。
+bge-large-zh-v1.5：向量维度 1024，模型体积约 1.3GB，检索质量更高，适合生产环境。
+bge-m3：支持多语言、多粒度（稠密+稀疏+多向量）检索。
+
+M3E 系列：
+由 MokaAI 开发，基于中文语料训练，在中文语义相似度任务上表现良好。
+m3e-base：向量维度 768，适合中文场景。
+
+OpenAI Embedding：
+text-embedding-3-small：向量维度 1536，性价比高。
+text-embedding-3-large：向量维度 3072，质量最优但成本较高。
+优势是无需本地部署，API 调用即可；局限是依赖网络和数据隐私。
+
+Embedding 模型的评估指标主要包括：
+- MTEB（Massive Text Embedding Benchmark）榜单排名
+- 在特定领域数据上的检索召回率
+- 向量维度与存储成本的权衡
+
+在实际项目中，建议先用轻量模型（如 bge-small）走通全链路，再根据评估结果决定是否升级到更大的模型。

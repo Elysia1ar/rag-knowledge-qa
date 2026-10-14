@@ -1,0 +1,40 @@
+Docker 是一个开源的容器化平台，用于打包、分发和运行应用及其依赖。
+
+核心概念：
+- 镜像（Image）：只读模板，包含应用代码、运行时、库和配置
+- 容器（Container）：镜像的运行实例，具有独立的文件系统和网络
+- 仓库（Registry）：存储和分发镜像，如 Docker Hub、阿里云 ACR
+- Dockerfile：定义镜像构建步骤的文本文件
+
+常用命令：
+docker build -t myapp:1.0 .
+docker run -d -p 8000:8000 --name myapp myapp:1.0
+docker ps -a
+docker logs -f myapp
+docker exec -it myapp bash
+docker stop myapp && docker rm myapp
+
+Dockerfile 最佳实践：
+- 使用多阶段构建减小镜像体积
+- 合并 RUN 命令减少层数
+- 使用 .dockerignore 排除无关文件
+- 尽量使用非 root 用户运行
+- 固定基础镜像版本，避免 latest
+
+Docker Compose 用于编排多个容器：
+services:
+  app:
+    build: .
+    ports: ["8000:8000"]
+    depends_on: [db]
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: secret
+
+数据持久化通过 volumes 挂载：
+- 命名卷：docker volume create mydata
+- 绑定挂载：-v /host/path:/container/path
+
+网络方面，Docker 提供 bridge、host、overlay 等多种驱动。
+容器间通信推荐使用自定义 bridge 网络，通过服务名互相解析。

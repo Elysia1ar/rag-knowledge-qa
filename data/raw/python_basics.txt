@@ -1,0 +1,20 @@
+Python 是一种解释型、面向对象的高级编程语言，由 Guido van Rossum 于 1991 年发布。
+它以简洁易读的语法著称，广泛用于 Web 开发、数据分析、人工智能和自动化脚本。
+
+Python 的核心数据类型包括：整数（int）、浮点数（float）、字符串（str）、列表（list）、元组（tuple）、字典（dict）和集合（set）。
+列表和字典是最常用的两种容器类型，前者有序可变，后者以键值对形式存储。
+
+Python 支持多种编程范式，包括面向过程、面向对象和函数式编程。
+函数是一等公民，可以作为参数传递或作为返回值。
+
+生成器（generator）是 Python 中一种特殊的迭代器，使用 yield 关键字定义。
+调用生成器函数时不会立即执行，而是返回一个生成器对象，每次调用 next() 才执行到下一个 yield。
+
+装饰器（decorator）是 Python 的语法糖，可以在不修改函数代码的前提下增强函数功能。
+常用的装饰器包括 @staticmethod、@classmethod、@property 和 @functools.lru_cache。
+
+Python 的异常处理使用 try/except/finally 结构。
+常见的异常类型包括 ValueError、TypeError、KeyError、IndexError 和 AttributeError。
+
+虚拟环境（virtualenv、venv、conda）用于隔离不同项目的依赖。
+包管理工具 pip 和 uv 可以从 PyPI 安装第三方库。

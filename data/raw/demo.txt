@@ -1,0 +1,8 @@
+RAG 是 Retrieval-Augmented Generation 的缩写，中文译为"检索增强生成"。
+它通过在生成前检索外部知识库，把相关片段拼进上下文，让大模型回答有据可依。
+
+RAG 的典型管线包括：文档加载、文本分块、向量化、检索、重排序、生成。
+其中"混合检索 + 重排序"是提升召回与准确率的关键手段。
+
+常见向量库包括 Chroma、FAISS、Milvus、Qdrant、Weaviate。
+EOF

@@ -1,0 +1,32 @@
+services:
+  rag-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rag-knowledge-qa:latest
+    container_name: rag-knowledge-qa
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      # 容器内路径覆盖（.env 里的宿主机路径在这里不适用）
+      DB_URL: "sqlite+aiosqlite:////app/data/app.db"
+    volumes:
+      # 挂载整个 data 目录：模型缓存 / 向量库 / BM25 索引 / 上传文档 / SQLite
+      - ./data:/app/data
+      # 挂载 .env（避免把密钥打进镜像）
+      # 如果已在 env_file 指定，这里可省略
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+    deploy:
+      resources:
+        limits:
+          memory: 4g
+        reservations:
+          memory: 2g

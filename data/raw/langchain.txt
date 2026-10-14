@@ -1,0 +1,37 @@
+LangChain 是一个用于开发大语言模型应用的开源框架，提供了构建 RAG 系统所需的完整组件生态。
+
+LangChain 的核心模块：
+
+langchain-core：基础抽象层，定义了 Runnable、PromptTemplate、OutputParser、Document 等核心接口。
+提供了 LCEL（LangChain Expression Language），允许用管道符 | 组合组件。
+
+langchain-community：第三方集成集合，包含大量文档加载器、向量库适配器、工具集成等。
+例如 PyPDFLoader、TextLoader、Chroma 适配器等。
+
+langchain-openai / langchain-huggingface / langchain-chroma：
+面向特定平台的合作伙伴包，仅依赖 langchain-core，安装更轻量。
+
+LangChain 中 RAG 的关键组件：
+
+文档加载器（Document Loaders）：将各种格式的文件加载为 Document 对象。
+常用：PyPDFLoader、Docx2txtLoader、TextLoader、UnstructuredMarkdownLoader。
+
+文本分割器（Text Splitters）：将长文档切分为 chunk。
+常用：RecursiveCharacterTextSplitter，支持自定义分隔符和 chunk_size。
+
+向量存储（Vector Stores）：封装向量数据库的读写操作。
+常用：Chroma、FAISS。
+
+检索器（Retrievers）：封装检索逻辑，返回相关文档。
+常用：VectorStoreRetriever、BM25Retriever、EnsembleRetriever。
+
+链（Chains）：将检索和生成串联为完整的处理流程。
+常用：create_retrieval_chain、create_stuff_documents_chain。
+
+LangChain 1.x 版本的主要变化：
+- 主包变薄，集成包独立发布
+- 推荐使用 LCEL 替代传统 Chain 类
+- Python 最低版本要求 3.10
+
+构建 RAG 应用的典型代码结构：
+加载文档 → 分块 → 向量化 → 存入向量库 → 构建检索器 → 组装 QA Chain → 调用 LLM 生成回答。

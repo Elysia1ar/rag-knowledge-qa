@@ -1,0 +1,26 @@
+重排序（Rerank）是 RAG 检索管线中的精排环节，用于对初步召回的候选文档进行更精确的相关性排序。
+
+Bi-Encoder 与 Cross-Encoder 的区别：
+
+Bi-Encoder（双塔模型）：
+将 query 和 document 分别编码为向量，通过计算向量相似度（余弦相似度或点积）来排序。
+优势是编码可以离线预计算，检索速度快，适合大规模召回。
+局限是 query 和 document 之间没有交互，语义匹配精度有限。
+典型代表：BGE Embedding、Sentence-BERT。
+
+Cross-Encoder（交叉编码器）：
+将 query 和 document 拼接后一起输入模型，通过注意力机制捕捉两者之间的细粒度交互。
+优势是排序精度显著高于 Bi-Encoder。
+局限是无法预计算，每对 query-document 都需要实时推理，速度慢，不适合大规模检索。
+典型代表：BGE-Reranker、Cohere Rerank。
+
+在 RAG 系统中，通常采用“漏斗式”架构：
+第一步：用 Bi-Encoder 向量检索从海量文档中快速召回 Top-20 到 Top-50 候选。
+第二步：用 Cross-Encoder 对候选进行精排，返回 Top-3 到 Top-5 最终结果。
+
+常用的中文 Reranker 模型：
+BAAI/bge-reranker-base：约 1.1GB，效果稳定。
+BAAI/bge-reranker-large：约 2.2GB，精度更高。
+BAAI/bge-reranker-v2-m3：支持多语言。
+
+评估重排序效果时，可以对比引入 Reranker 前后的 Recall@K 和 MRR 指标变化。

@@ -1,0 +1,36 @@
+SQLAlchemy 是 Python 最流行的 ORM（对象关系映射）库，支持同步和异步两种模式。
+
+核心概念：
+- Engine：数据库连接引擎，管理连接池
+- Session：会话，跟踪对象状态并管理事务
+- Base：声明式基类，通过继承定义模型
+- Mapped / mapped_column：SQLAlchemy 2.0 的类型注解风格
+
+定义模型：
+class User(Base):
+    __tablename__ = "users"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(50))
+    email: Mapped[str] = mapped_column(String(100), unique=True)
+
+查询使用 select()：
+stmt = select(User).where(User.name == "alice").order_by(User.id)
+result = await session.execute(stmt)
+users = result.scalars().all()
+
+关联关系通过 relationship 定义：
+class Post(Base):
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    user: Mapped["User"] = relationship(back_populates="posts")
+
+异步支持使用 async_sessionmaker 和 create_async_engine，驱动推荐 aiosqlite（SQLite）或 asyncpg（PostgreSQL）。
+
+数据库迁移通常使用 Alembic：
+alembic init migrations
+alembic revision --autogenerate -m "add column"
+alembic upgrade head
+
+常见坑：
+- expire_on_commit=False 避免提交后对象属性失效
+- 在异步上下文中不要使用同步 Session
+- N+1 查询用 selectinload 或 joinedload 优化

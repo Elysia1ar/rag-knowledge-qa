@@ -1,0 +1,37 @@
+Linux 是广泛用于服务器和云环境的操作系统内核，配合各种发行版（Ubuntu、Debian、CentOS、Alpine）。
+
+文件操作：
+ls -lah                 列出文件，含隐藏和大小
+cp -r src dst           递归复制
+mv old new              重命名或移动
+rm -rf dir              递归强制删除（危险）
+find . -name "*.py"     按名称查找
+chmod +x script.sh      添加执行权限
+
+文本处理：
+cat file.txt            查看文件
+head -n 20 file.txt     前 20 行
+tail -f app.log         实时跟踪日志
+grep -rn "TODO" src/    递归搜索含 TODO 的行
+sed 's/old/new/g' f.txt 替换
+awk '{print $1}' f.txt  输出第一列
+
+进程与系统：
+ps aux | grep python    查看进程
+top / htop              实时监控
+kill -9 <pid>           强制杀进程
+df -h                   磁盘使用
+free -h                 内存使用
+systemctl status nginx  查看服务状态
+
+网络：
+curl -X POST http://... 发送 HTTP 请求
+wget <url>              下载文件
+netstat -tulpn          查看端口监听
+ss -tulpn               现代替代品
+ping / traceroute       网络连通性
+
+权限与用户：
+useradd / usermod / userdel
+chown user:group file
+sudo 提权

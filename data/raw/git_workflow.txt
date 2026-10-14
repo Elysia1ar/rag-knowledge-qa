@@ -1,0 +1,41 @@
+Git 是分布式版本控制系统，用于跟踪代码变更、协同开发。
+
+核心概念：
+- 工作区、暂存区、本地仓库、远程仓库
+- 提交（commit）：一次代码变更的快照
+- 分支（branch）：独立开发线，默认为 main 或 master
+- 标签（tag）：标记重要版本，如 v1.0.0
+
+常用命令：
+git init
+git clone <url>
+git add .
+git commit -m "feat: add user login"
+git push origin main
+git pull --rebase
+git status
+git log --oneline --graph
+
+分支操作：
+git branch feature-x
+git checkout feature-x       # 或 git switch feature-x
+git merge feature-x
+git rebase main
+
+解决冲突：
+1. 编辑冲突文件
+2. git add <file>
+3. git rebase --continue 或 git commit
+
+团队协作常用工作流：
+- Git Flow：main / develop / feature / release / hotfix 五类分支
+- GitHub Flow：只有 main 和 feature 分支，通过 PR 合并
+- Trunk-Based：所有人向 main 频繁提交，配合特性开关
+
+Commit 规范（Conventional Commits）：
+feat: 新功能
+fix: 修复 bug
+docs: 文档变更
+refactor: 重构
+test: 测试
+chore: 构建或工具变更
